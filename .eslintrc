@@ -1,0 +1,26 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "linebreak-style": "off",
+    "no-nested-ternary": "off",
+    "no-use-before-define": "off",
+    "no-confusing-arrow": "off",
+    "react/sort-comp": "off",
+    "class-methods-use-this": "off",
+    "import/no-extraneous-dependencies": "off",
+    "function-paren-newline": "off",
+    "import/no-named-as-default-member": "off",
+    "max-len": [
+      "error",
+      {
+        "ignoreComments": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreStrings": true
+      }
+    ]
+  }
+}
