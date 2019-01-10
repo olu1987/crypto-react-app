@@ -323,15 +323,26 @@ var Ticker = function Ticker() {
       tickerList = _useState2[0],
       setTickerList = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      requestCount = _useState4[0],
+      setRequestCount = _useState4[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setTimeout(function () {
+      setRequestCount(requestCount + 1);
+    }, 5000);
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    console.log('update');
     _lib_sdks_ticker__WEBPACK_IMPORTED_MODULE_1__["default"].getList().then(function (data) {
       setTickerList(data);
     });
-  });
+  }, [requestCount]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 22
     },
     __self: this
   }, JSON.stringify(tickerList));
