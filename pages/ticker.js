@@ -1,10 +1,8 @@
-import React from 'react';
+import tickerSdk from '../lib/sdks/ticker';
 
 const Ticker = () => {
   return (
-    <div>
-      
-    </div>
+    <div>Hello Ticker</div>
   );
 };
 
