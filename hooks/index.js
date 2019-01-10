@@ -11,13 +11,12 @@ export const useTicker = (requestInterval) => {
     }, requestInterval);
   });
   useEffect(() => {
-    console.log('update');
     tickerSdk.getList().then((data) => {
       setTickerList(data);
     });
   }, [requestCount]);
   return { tickerList };
-}
+};
 
 export default {
   useTicker,
