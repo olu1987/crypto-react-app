@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -186,21 +186,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var composePromise = function composePromise() {
-  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
-    functions[_key] = arguments[_key];
-  }
-
-  return function (initialValue) {
-    return functions.reduceRight(function (acc, fn) {
-      return Promise.resolve(acc).then(fn);
-    }, initialValue);
-  };
-};
-
 function get(currencyPair) {
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(_constants_api__WEBPACK_IMPORTED_MODULE_1__["default"].ALLOW_CORS_URL).concat(_constants_api__WEBPACK_IMPORTED_MODULE_1__["default"].CRPTO_API_URL, "/ticker/").concat(currencyPair)).then(function (payload) {
-    return _ticker_factory__WEBPACK_IMPORTED_MODULE_2__["default"].createTickerFromPayload(payload.data);
+    return _ticker_factory__WEBPACK_IMPORTED_MODULE_2__["default"].createTickerFromPayload(currencyPair, payload.data);
   }).catch(function (e) {
     return console.log(e);
   });
@@ -232,7 +220,8 @@ __webpack_require__.r(__webpack_exports__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Ticker = function Ticker(_ref) {
-  var high = _ref.high,
+  var currencyPair = _ref.currencyPair,
+      high = _ref.high,
       last = _ref.last,
       timestamp = _ref.timestamp,
       bid = _ref.bid,
@@ -244,6 +233,7 @@ var Ticker = function Ticker(_ref) {
 
   _classCallCheck(this, Ticker);
 
+  this.currencyPair = currencyPair;
   this.high = high;
   this.last = last;
   this.timestamp = timestamp;
@@ -271,7 +261,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_ticker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models/ticker */ "./lib/sdks/ticker/models/ticker.js");
 
 
-function createTickerFromPayload(_ref) {
+function createTickerFromPayload(currencyPair, _ref) {
   var ask = _ref.ask,
       high = _ref.high,
       last = _ref.last,
@@ -282,6 +272,7 @@ function createTickerFromPayload(_ref) {
       low = _ref.low,
       open = _ref.open;
   return new _models_ticker__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    currencyPair: currencyPair,
     ask: ask,
     high: high,
     last: last,
@@ -315,25 +306,42 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "C:\\Users\\Olu\\Desktop\\crypto-react-app\\pages\\ticker.js";
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 var Ticker = function Ticker() {
-  _lib_sdks_ticker__WEBPACK_IMPORTED_MODULE_1__["default"].getList().then(function (data) {
-    console.log(data);
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tickerList = _useState2[0],
+      setTickerList = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    _lib_sdks_ticker__WEBPACK_IMPORTED_MODULE_1__["default"].getList().then(function (data) {
+      setTickerList(data);
+    });
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 15
     },
     __self: this
-  }, "Hello Ticker");
+  }, JSON.stringify(tickerList));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Ticker);
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!*******************************!*\
   !*** multi ./pages/ticker.js ***!
   \*******************************/
