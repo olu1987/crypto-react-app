@@ -93,6 +93,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var composePromise = function composePromise() {
+  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
+    functions[_key] = arguments[_key];
+  }
+
+  return function (initialValue) {
+    return functions.reduceRight(function (acc, fn) {
+      return Promise.resolve(acc).then(fn);
+    }, initialValue);
+  };
+};
+
 function get(currencyPair) {
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(_constants_api__WEBPACK_IMPORTED_MODULE_1__["default"].ALLOW_CORS_URL).concat(_constants_api__WEBPACK_IMPORTED_MODULE_1__["default"].CRPTO_API_URL, "/ticker/").concat(currencyPair)).then(function (payload) {
     return _ticker_factory__WEBPACK_IMPORTED_MODULE_2__["default"].createTickerFromPayload(payload.data);
@@ -101,8 +113,15 @@ function get(currencyPair) {
   });
 }
 
+function getList() {
+  return Promise.all(_constants_currency_pairs__WEBPACK_IMPORTED_MODULE_3__["default"].map(function (pair) {
+    return get(pair.value);
+  }));
+}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  get: get
+  get: get,
+  getList: getList
 });
 
 /***/ }),
@@ -2146,10 +2165,13 @@ var _jsxFileName = "C:\\Users\\Olu\\Desktop\\crypto-react-app\\pages\\ticker.js"
 
 
 var Ticker = function Ticker() {
+  _lib_sdks_ticker__WEBPACK_IMPORTED_MODULE_1__["default"].getList().then(function (data) {
+    console.log(data);
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 5
+      lineNumber: 8
     },
     __self: this
   }, "Hello Ticker");
