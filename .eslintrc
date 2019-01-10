@@ -10,6 +10,7 @@
     "no-use-before-define": "off",
     "no-confusing-arrow": "off",
     "react/sort-comp": "off",
+    "react/jsx-one-expression-per-line": "off",
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off",
     "class-methods-use-this": "off",
