@@ -4,6 +4,7 @@ import tickerSdk from '../lib/sdks/ticker';
 export const useTicker = (requestInterval) => {
   const [tickerList, setTickerList] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -13,9 +14,10 @@ export const useTicker = (requestInterval) => {
   useEffect(() => {
     tickerSdk.getList().then((data) => {
       setTickerList(data);
+      setLoading(false);
     });
   }, [requestCount]);
-  return { tickerList };
+  return { tickerList, loading };
 };
 
 export default {

@@ -20,7 +20,8 @@
     "eslint-plugin-react": "^7.12.3",
     "next": "^7.0.2",
     "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2"
+    "react-dom": "^16.7.0-alpha.2",
+    "react-table": "^6.8.6"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
