@@ -1,13 +1,2 @@
 node_modules/
-jspm_packages/
-dist/
-coverage/
-.idea/
-.vscode/
 .next/
-*.log
-npm-debug.log
-debug.log
-jsconfig.json
-**/*.orig
-.DS_Store
