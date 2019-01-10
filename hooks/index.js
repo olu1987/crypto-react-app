@@ -1,13 +1,24 @@
 import { useState, useEffect } from 'react';
+import tickerSdk from '../lib/sdks/ticker';
 
-const useCounter = () => {
-  const [count, setCount] = useState(0);
+export const useTicker = (requestInterval) => {
+  const [tickerList, setTickerList] = useState([]);
+  const [requestCount, setRequestCount] = useState(0);
+
   useEffect(() => {
-     console.log('effect used');
+    setTimeout(() => {
+      setRequestCount(requestCount + 1);
+    }, requestInterval);
   });
-  return { count, setCount };
+  useEffect(() => {
+    console.log('update');
+    tickerSdk.getList().then((data) => {
+      setTickerList(data);
+    });
+  }, [requestCount]);
+  return { tickerList };
 }
 
-export {
-  useCounter,
-}
+export default {
+  useTicker,
+};

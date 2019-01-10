@@ -1,23 +1,7 @@
-import { useState, useEffect } from 'react';
-
-import tickerSdk from '../lib/sdks/ticker';
+import { useTicker } from '../hooks';
 
 const Ticker = () => {
-  const [tickerList, setTickerList] = useState([]);
-  const [requestCount, setRequestCount] = useState(0);
-
-  useEffect(() => { 
-    setTimeout(() => {
-      setRequestCount(requestCount + 1);
-    }, 5000);
-  });
-  useEffect(() => {
-    console.log('update');
-    tickerSdk.getList().then((data) => {
-      setTickerList(data);
-    });
-  }, [requestCount]);
- 
+  const tickerList = useTicker(5000);
   return (
     <div>{JSON.stringify(tickerList)}</div>
   );
