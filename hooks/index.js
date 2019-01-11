@@ -24,6 +24,7 @@ export const useTicker = (requestInterval) => {
 
 export const useOrderBook = (requestInterval) => {
   const [orderBookList, setOrderBookList] = useState([]);
+  const [orderBookEstimator, setOrderBookEstimator] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedCurrencyPair, setSelectedCurrencyPair] = useState(currencyPairs[0]);
@@ -36,11 +37,12 @@ export const useOrderBook = (requestInterval) => {
   useEffect(() => {
     setLoading(true);
     orderBookSdk.get(selectedCurrencyPair.value).then((data) => {
+      setOrderBookEstimator(data.getEstimatorData());
       setOrderBookList(data);
       setLoading(false);
     });
   }, [requestCount, selectedCurrencyPair]);
-  return { orderBookList, loading, selectedCurrencyPair, setSelectedCurrencyPair };
+  return { orderBookList, loading, selectedCurrencyPair, setSelectedCurrencyPair, orderBookEstimator };
 };
 
 export default {

@@ -6,11 +6,13 @@ import columns from './constants/columns';
 import currencyPairs from '../../lib/constants/currency-pairs';
 
 const OrderBookTable = () => {
-  const { orderBookList, loading, setSelectedCurrencyPair, selectedCurrencyPair } = useOrderBook(300000);
+  const { orderBookList, loading, setSelectedCurrencyPair, selectedCurrencyPair, orderBookEstimator } = useOrderBook(300000);
   return (
     <React.Fragment>
-      <h1>Order Book</h1>
       <div className="row">
+        <div className="col">
+          <h4>Currency Pair</h4>
+        </div>
         <div className="col pb-2">
           <ReactSelect
             instanceId="currency-selector"
@@ -21,12 +23,27 @@ const OrderBookTable = () => {
           />
         </div>
       </div>
-      <div className="row">
+      <h1 className="main-header">Order Book</h1>
+      <div className="row estimator-row">
+        <div className="col-12">
+          <h3>Estimator</h3>
+        </div>
+        <div className="col">
+          <ReactTable
+            data={orderBookEstimator}
+            columns={columns.ESTIMATOR}
+            loading={loading}
+            minRows={1}
+            showPagination={false}
+          />
+        </div>
+      </div>
+      <div className="row bids-row">
         <div className="col">
           <h3>Bids</h3>
           <ReactTable
             data={orderBookList.bids}
-            columns={columns}
+            columns={columns.BOOK}
             loading={loading}
           />
         </div>
@@ -34,12 +51,18 @@ const OrderBookTable = () => {
           <h3>Asks</h3>
           <ReactTable
             data={orderBookList.asks}
-            columns={columns}
+            columns={columns.BOOK}
             loading={loading}
           />
         </div>
       </div>
-      
+      <style jsx>
+        {`
+          .main-header, .estimator-row, .bids-row {
+            margin-top: 20px;
+          }
+        `}
+      </style>
     </React.Fragment>
    
   );
