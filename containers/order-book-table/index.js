@@ -23,7 +23,7 @@ const OrderBookTable = () => {
           />
         </div>
       </div>
-      <h1 className="main-header">Order Book</h1>
+      <h1 className="main-header">Order Book <small>{selectedCurrencyPair.name}</small></h1>
       <div className="row estimator-row">
         <div className="col-12">
           <h3>Estimator</h3>

@@ -21,5 +21,9 @@ ESTIMATOR: [{
 {
   Header: 'Average Ask Unit Requested',
   accessor: 'averageAskUnitRequested',
+},
+{
+  Header: 'Average Ask Safety Price',
+  accessor: 'averageAskSafetyPrice',
 }],
 };
