@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import tickerSdk from '../lib/sdks/ticker';
 import orderBookSdk from '../lib/sdks/order-book';
+import currencyPairs from '../lib/constants/currency-pairs';
 
 export const useTicker = (requestInterval) => {
   const [tickerList, setTickerList] = useState([]);
@@ -25,6 +26,7 @@ export const useOrderBook = (requestInterval) => {
   const [orderBookList, setOrderBookList] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [selectedCurrencyPair, setSelectedCurrencyPair] = useState(currencyPairs[0]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,12 +34,13 @@ export const useOrderBook = (requestInterval) => {
     }, requestInterval);
   });
   useEffect(() => {
-    orderBookSdk.get('btcusd').then((data) => {
+    setLoading(true);
+    orderBookSdk.get(selectedCurrencyPair.value).then((data) => {
       setOrderBookList(data);
       setLoading(false);
     });
-  }, [requestCount]);
-  return { orderBookList, loading };
+  }, [requestCount, selectedCurrencyPair]);
+  return { orderBookList, loading, selectedCurrencyPair, setSelectedCurrencyPair };
 };
 
 export default {
