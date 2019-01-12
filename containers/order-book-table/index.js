@@ -3,10 +3,20 @@ import ReactTable from 'react-table';
 import ReactSelect from 'react-select';
 import { useOrderBook } from '../../hooks';
 import columns from './constants/columns';
+import safetyPercentages from './constants/safety-percentages';
 import currencyPairs from '../../lib/constants/currency-pairs';
 
+
 const OrderBookTable = () => {
-  const { orderBookList, loading, setSelectedCurrencyPair, selectedCurrencyPair, orderBookEstimator } = useOrderBook(300000);
+  const {
+    orderBookList,
+    loading,
+    setSelectedCurrencyPair,
+    selectedCurrencyPair,
+    orderBookEstimator,
+    selectedSafetyPercentage,
+    setSelectedSafetyPercentage,
+  } = useOrderBook(300000);
   return (
     <React.Fragment>
       <div className="row">
@@ -20,6 +30,17 @@ const OrderBookTable = () => {
             options={currencyPairs}
             getOptionLabel={option => option.name}
             onChange={pair => setSelectedCurrencyPair(pair)}
+          />
+        </div>
+        <div className="col">
+          <h4>Safety Percentage Order</h4>
+        </div>
+        <div className="col pb-2">
+          <ReactSelect
+            instanceId="safety-percentage-selector"
+            value={selectedSafetyPercentage}
+            options={safetyPercentages}
+            onChange={safetyPercentage => setSelectedSafetyPercentage(safetyPercentage)}
           />
         </div>
       </div>

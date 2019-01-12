@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import tickerSdk from '../lib/sdks/ticker';
 import orderBookSdk from '../lib/sdks/order-book';
 import currencyPairs from '../lib/constants/currency-pairs';
+import safetyPercentages from '../containers/order-book-table/constants/safety-percentages';
 
 export const useTicker = (requestInterval) => {
   const [tickerList, setTickerList] = useState([]);
@@ -28,6 +29,7 @@ export const useOrderBook = (requestInterval) => {
   const [requestCount, setRequestCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedCurrencyPair, setSelectedCurrencyPair] = useState(currencyPairs[0]);
+  const [selectedSafetyPercentage, setSelectedSafetyPercentage] = useState(safetyPercentages[0]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -36,13 +38,27 @@ export const useOrderBook = (requestInterval) => {
   });
   useEffect(() => {
     setLoading(true);
-    orderBookSdk.get(selectedCurrencyPair.value).then((data) => {
-      setOrderBookEstimator(data.getEstimatorData());
-      setOrderBookList(data);
+    orderBookSdk.get(selectedCurrencyPair.value).then((orderBook) => {
+      setOrderBookEstimator([orderBook.getEstimator(selectedSafetyPercentage.value)]);
+      setOrderBookList(orderBook);
       setLoading(false);
     });
   }, [requestCount, selectedCurrencyPair]);
-  return { orderBookList, loading, selectedCurrencyPair, setSelectedCurrencyPair, orderBookEstimator };
+  
+  useEffect(() => {
+    if (orderBookEstimator.length) {
+      setOrderBookEstimator([orderBookList.getEstimator(selectedSafetyPercentage.value)]);
+    }
+  }, [selectedSafetyPercentage]);
+  return {
+    orderBookList,
+    loading,
+    selectedCurrencyPair,
+    setSelectedCurrencyPair,
+    orderBookEstimator,
+    selectedSafetyPercentage,
+    setSelectedSafetyPercentage,
+  };
 };
 
 export default {
