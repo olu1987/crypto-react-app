@@ -8,6 +8,7 @@ export const useTicker = (requestInterval) => {
   const [tickerList, setTickerList] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -16,11 +17,16 @@ export const useTicker = (requestInterval) => {
   });
   useEffect(() => {
     tickerSdk.getList().then((data) => {
+      if (!data.length) {
+        return Promise.reject();
+      }
       setTickerList(data);
       setLoading(false);
+    }).catch((e) => {
+      setError(true);
     });
   }, [requestCount]);
-  return { tickerList, loading };
+  return { tickerList, loading, error };
 };
 
 export const useOrderBook = (requestInterval) => {

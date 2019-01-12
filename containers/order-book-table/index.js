@@ -5,6 +5,7 @@ import { useOrderBook } from '../../hooks';
 import columns from './constants/columns';
 import safetyPercentages from './constants/safety-percentages';
 import currencyPairs from '../../lib/constants/currency-pairs';
+import ErrorOverlay from '../../components/error-overlay';
 
 
 const OrderBookTable = () => {
@@ -22,9 +23,9 @@ const OrderBookTable = () => {
     <React.Fragment>
       {error
       && (
-        <div className="error-overlay">
-          <h1> Sorry but something went wrong. Please try again later</h1>
-        </div>
+        <ErrorOverlay
+          text=" Sorry but something went wrong. Please try again later"
+        />
       )}
       {!error
       && (
