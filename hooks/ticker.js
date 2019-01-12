@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import tickerSdk from '../lib/sdks/ticker';
-import orderBookSdk from '../lib/sdks/order-book';
-import currencyPairs from '../lib/constants/currency-pairs';
-import safetyPercentages from '../containers/order-book-table/constants/safety-percentages';
 
 export default (requestInterval) => {
   const [tickerList, setTickerList] = useState([]);
@@ -16,6 +14,7 @@ export default (requestInterval) => {
     }, requestInterval);
   });
   useEffect(() => {
+    const source = axios.CancelToken.source();
     tickerSdk.getList().then((data) => {
       if (!data.length) {
         return Promise.reject();
@@ -25,6 +24,9 @@ export default (requestInterval) => {
     }).catch((e) => {
       setError(true);
     });
+    return () => {
+      source.cancel('Cancelling in cleanup');
+    };
   }, [requestCount]);
   return { tickerList, loading, error };
 };

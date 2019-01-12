@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import orderBookSdk from '../lib/sdks/order-book';
 import currencyPairs from '../lib/constants/currency-pairs';
 import safetyPercentages from '../containers/order-book-table/constants/safety-percentages';
@@ -12,14 +13,10 @@ export default (requestInterval) => {
   const [selectedSafetyPercentage, setSelectedSafetyPercentage] = useState(safetyPercentages[0]);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setRequestCount(requestCount + 1);
-    }, requestInterval);
-  });
-  useEffect(() => {
+  const getEstimator = (currencyPair) => {
+    const source = axios.CancelToken.source();
     setLoading(true);
-    orderBookSdk.get(selectedCurrencyPair.value).then((orderBook) => {
+    orderBookSdk.get(currencyPair).then((orderBook) => {
       if (!orderBook) {
         return Promise.reject();
       }
@@ -29,7 +26,17 @@ export default (requestInterval) => {
     }).catch((e) => {
       setError(true);
     });
-  }, [requestCount, selectedCurrencyPair]);
+    return () => {
+      source.cancel('Cancelling in cleanup');
+    };
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRequestCount(requestCount + 1);
+    }, requestInterval);
+  });
+  useEffect(() => getEstimator(selectedCurrencyPair), [requestCount, selectedCurrencyPair]);
   
   useEffect(() => {
     if (orderBookEstimator.length) {
@@ -45,5 +52,6 @@ export default (requestInterval) => {
     selectedSafetyPercentage,
     setSelectedSafetyPercentage,
     error,
+    getEstimator,
   };
 };
