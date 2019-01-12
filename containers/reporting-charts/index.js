@@ -18,15 +18,26 @@ const ReportingCharts = () => {
       && (
         <div className="container">
           <h1>Reporting</h1>
-          <ReactHighcharts config={graphOneConfig} />
-          <ReactHighcharts config={graphTwoConfig} />
-          <ReactHighcharts config={graphThreeConfig} />
-          <ReactHighcharts config={graphFourConfig} />
+          <div className="chart-row">
+            <ReactHighcharts config={graphOneConfig} />
+          </div>
+          <div className="chart-row">
+            <ReactHighcharts config={graphTwoConfig} />
+          </div>
+          <div className="chart-row">
+            <ReactHighcharts config={graphThreeConfig} />
+          </div>
+          <div className="chart-row">
+            <ReactHighcharts config={graphFourConfig} />
+          </div>
         </div>
       )
       }
       <style jsx>
         {`
+         .chart-row {
+           margin-top: 50px;
+         }
 
 
         `}

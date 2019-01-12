@@ -39,8 +39,6 @@ export default () => {
     setGraphTwoConfig(getPieConfig(
       {
         title: 'Average Bid Unit Requested',
-        xAxisLabel: 'Currency Pair',
-        yXaxisLabel: 'Unit',
         dataLabel: 'averageBidUnitRequested',
         dataList: estimatorList,
       }));
@@ -55,8 +53,6 @@ export default () => {
     setGraphFourConfig(getPieConfig(
       {
         title: 'Average Ask Unit Requested',
-        xAxisLabel: 'Currency Pair',
-        yXaxisLabel: 'Unit',
         dataLabel: 'averageAskUnitRequested',
         dataList: estimatorList,
       }));
