@@ -18,7 +18,11 @@ export default () => {
       if (!data) {
         return Promise.reject();
       }
-      setEstimatorList(data.map(el => el.getEstimator()));
+      try {
+        setEstimatorList(data.map(el => el.getEstimator()));
+      } catch {
+        return Promise.reject();
+      }
     }).catch((e) => {
       setError(true);
     });
