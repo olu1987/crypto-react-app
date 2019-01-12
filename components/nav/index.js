@@ -13,6 +13,9 @@ const Nav = () => {
       <Link href="/order-book">
         <a>Order Book</a>
       </Link>
+      <Link href="/reporting">
+        <a>Reporting</a>
+      </Link>
       <style jsx>
         {`
           .nav {
