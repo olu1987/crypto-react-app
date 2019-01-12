@@ -30,6 +30,7 @@ export const useOrderBook = (requestInterval) => {
   const [loading, setLoading] = useState(true);
   const [selectedCurrencyPair, setSelectedCurrencyPair] = useState(currencyPairs[0]);
   const [selectedSafetyPercentage, setSelectedSafetyPercentage] = useState(safetyPercentages[0]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -39,9 +40,14 @@ export const useOrderBook = (requestInterval) => {
   useEffect(() => {
     setLoading(true);
     orderBookSdk.get(selectedCurrencyPair.value).then((orderBook) => {
+      if (!orderBook) {
+        return Promise.reject();
+      }
       setOrderBookEstimator([orderBook.getEstimator(selectedSafetyPercentage.value)]);
       setOrderBookList(orderBook);
       setLoading(false);
+    }).catch((e) => {
+      setError(true);
     });
   }, [requestCount, selectedCurrencyPair]);
   
@@ -58,6 +64,7 @@ export const useOrderBook = (requestInterval) => {
     orderBookEstimator,
     selectedSafetyPercentage,
     setSelectedSafetyPercentage,
+    error,
   };
 };
 
