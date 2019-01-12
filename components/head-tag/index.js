@@ -7,7 +7,7 @@ const HeadTag = () => {
       <title>Ticker</title>
       <link href="/static/react-table.css" rel="stylesheet" />
       <link href="/static/main.css" rel="stylesheet" />
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.css" />
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     </Head>
   );

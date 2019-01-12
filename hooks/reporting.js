@@ -14,6 +14,7 @@ export default () => {
   useEffect(() => {
     setLoading(true);
     orderBookSdk.getList().then((data) => {
+      setLoading(false);
       if (!data) {
         return Promise.reject();
       }
