@@ -59,7 +59,7 @@ const OrderBookTable = () => {
           <h1 className="main-header">Order Book <small>{selectedCurrencyPair.name}</small></h1>
           <div className="row estimator-row">
             <div className="col-12">
-              <h3>Estimator</h3>
+              <h4>Estimator</h4>
             </div>
             <div className="col">
               <ReactTable
@@ -73,7 +73,7 @@ const OrderBookTable = () => {
           </div>
           <div className="row bids-row">
             <div className="col">
-              <h3>Bids</h3>
+              <h4>Bids</h4>
               <ReactTable
                 data={orderBookList.bids}
                 columns={columns.BOOK}
@@ -81,7 +81,7 @@ const OrderBookTable = () => {
               />
             </div>
             <div className="col">
-              <h3>Asks</h3>
+              <h4>Asks</h4>
               <ReactTable
                 data={orderBookList.asks}
                 columns={columns.BOOK}

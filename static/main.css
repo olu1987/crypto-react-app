@@ -2,3 +2,7 @@ body {
   font-family: 'Roboto', sans-serif;
   padding-bottom: 30px;
 }
+
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+}
