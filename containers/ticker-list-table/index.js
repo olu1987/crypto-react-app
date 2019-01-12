@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTable from 'react-table';
-import { useTicker } from '../../hooks';
+import useTicker from '../../hooks/ticker';
 import columns from './constants/columns';
 import ErrorOverlay from '../../components/error-overlay';
 
@@ -22,6 +22,8 @@ const TickerListTable = () => {
              data={tickerList}
              columns={columns}
              loading={loading}
+             minRows={tickerList.length}
+             showPagination={tickerList.length > 20}
            />
          </React.Fragment>
          )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import ReactSelect from 'react-select';
-import { useOrderBook } from '../../hooks';
+import useOrderBook from '../../hooks/order-book';
 import columns from './constants/columns';
 import safetyPercentages from './constants/safety-percentages';
 import currencyPairs from '../../lib/constants/currency-pairs';
@@ -66,7 +66,7 @@ const OrderBookTable = () => {
                 data={orderBookEstimator}
                 columns={columns.ESTIMATOR}
                 loading={loading}
-                minRows={1}
+                minRows={orderBookEstimator.length}
                 showPagination={false}
               />
             </div>

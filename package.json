@@ -19,10 +19,12 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
+    "highcharts": "^7.0.1",
     "next": "^7.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
+    "react-highcharts": "^16.0.2",
     "react-select": "^2.2.0",
     "react-table": "^6.8.6"
   },

@@ -1,6 +1,8 @@
 export default [{
   Header: 'Currency Pair',
   accessor: 'currencyPair',
+  filterable: true,
+  filterMethod: (filter, row) => row[filter.id].toLowerCase().includes(filter.value.toLowerCase()),
 },
 {
   Header: 'High',
