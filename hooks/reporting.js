@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import useOrderBook from './order-book';
 import orderBookSdk from '../lib/sdks/order-book';
+import { getBarConfig, getPieConfig } from '../lib/config/high-charts';
 
 export default () => {
   const [estimatorList, setEstimatorList] = useState([]);
@@ -8,79 +8,60 @@ export default () => {
   const [graphTwoConfig, setGraphTwoConfig] = useState([]);
   const [graphThreeConfig, setGraphThreeConfig] = useState([]);
   const [graphFourConfig, setGraphFourConfig] = useState([]);
-
-  const getConfig = ({ title, type, xAxisLabel, yXaxisLabel, dataLabel }) => ({
-    chart: {
-      type: 'bar',
-      height: '700px',
-    },
-    title: {
-      text: title,
-    },
-    xAxis: {
-      title: {
-        text: xAxisLabel,
-      },
-    },
-    yAxis: {
-      title: {
-        text: yXaxisLabel,
-      },
-    },
-    plotOptions: {
-      bar: {
-        dataLabels: {
-          enabled: true,
-        },
-      },
-    },
-    series: estimatorList.map((estimator) => {
-      return {
-        name: estimator.currencyPair,
-        data: [estimator[dataLabel]],
-      };
-    }),
-  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     orderBookSdk.getList().then((data) => {
+      if (!data) {
+        return Promise.reject();
+      }
       setEstimatorList(data.map(el => el.getEstimator()));
-      console.log(estimatorList);
+    }).catch((e) => {
+      setError(true);
     });
   }, [estimatorList.length]);
   useEffect(() => {
-    setGraphOneConfig(getConfig(
+    setGraphOneConfig(getBarConfig(
       {
         title: 'Average Bid Price',
-        type: 'column',
         xAxisLabel: 'Currency Pair',
         yXaxisLabel: 'Price',
         dataLabel: 'averageBidPrice',
+        dataList: estimatorList,
       }));
-    setGraphTwoConfig(getConfig(
+    setGraphTwoConfig(getPieConfig(
       {
         title: 'Average Bid Unit Requested',
-        type: 'column',
         xAxisLabel: 'Currency Pair',
         yXaxisLabel: 'Unit',
         dataLabel: 'averageBidUnitRequested',
+        dataList: estimatorList,
       }));
-    setGraphThreeConfig(getConfig(
+    setGraphThreeConfig(getBarConfig(
       {
         title: 'Average Ask Price',
-        type: 'column',
         xAxisLabel: 'Currency Pair',
         yXaxisLabel: 'Unit',
         dataLabel: 'averageAskPrice',
+        dataList: estimatorList,
       }));
-    setGraphFourConfig(getConfig(
+    setGraphFourConfig(getPieConfig(
       {
         title: 'Average Ask Unit Requested',
-        type: 'column',
         xAxisLabel: 'Currency Pair',
         yXaxisLabel: 'Unit',
         dataLabel: 'averageAskUnitRequested',
+        dataList: estimatorList,
       }));
   }, [estimatorList.length]);
-  return { graphOneConfig, graphTwoConfig, graphThreeConfig, graphFourConfig };
+  return {
+    graphOneConfig,
+    graphTwoConfig,
+    graphThreeConfig,
+    graphFourConfig,
+    error,
+    loading,
+  };
 };

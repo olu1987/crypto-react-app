@@ -3,7 +3,7 @@ import ReactHighcharts from 'react-highcharts';
 import useReporting from '../../hooks/reporting';
 
 const ReportingCharts = () => {
-  const { graphOneConfig, graphTwoConfig, graphThreeConfig, graphFourConfig } = useReporting(300000);
+  const { graphOneConfig, graphTwoConfig, graphThreeConfig, graphFourConfig, loading } = useReporting(300000);
   return (
     <div className="container"> 
       <h1>Reporting</h1>
