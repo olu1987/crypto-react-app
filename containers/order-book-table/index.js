@@ -7,6 +7,7 @@ import safetyPercentages from './constants/safety-percentages';
 import currencyPairs from '../../lib/constants/currency-pairs';
 import ErrorOverlay from '../../components/error-overlay';
 
+import '../../lib/polyfills';
 
 const OrderBookTable = () => {
   const {

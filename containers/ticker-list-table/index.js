@@ -4,6 +4,8 @@ import useTicker from '../../hooks/ticker';
 import columns from './constants/columns';
 import ErrorOverlay from '../../components/error-overlay';
 
+import '../../lib/polyfills';
+
 const TickerListTable = () => {
   const { tickerList, loading, error } = useTicker(300000);
   return (
