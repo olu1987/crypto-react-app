@@ -32,6 +32,13 @@ const Nav = () => {
            text-decoration: none;
            opacity: 0.7;
           }
+
+          @media(max-width: 767px) {
+            .nav > a {
+              padding-right: 12px;
+              font-size: 14px;
+            }
+          }
         `}
       </style>
     </div>

@@ -30,13 +30,10 @@ const OrderBookTable = () => {
       )}
       {!error
       && (
-        <React.Fragment>  
-          <div className="row">
-            <div className="col">
-              <h4>Currency Pair</h4>
-              {}
-            </div>
-            <div className="col pb-2">
+        <React.Fragment>
+          <div className="row pb-3">
+            <div className="col-md-6 col-sm-12 mt-1">
+              <h4 className="pb-2">Currency Pair</h4>
               <ReactSelect
                 instanceId="currency-selector"
                 value={selectedCurrencyPair}
@@ -45,10 +42,8 @@ const OrderBookTable = () => {
                 onChange={pair => setSelectedCurrencyPair(pair)}
               />
             </div>
-            <div className="col">
-              <h4>Safety Percentage Order</h4>
-            </div>
-            <div className="col pb-2">
+            <div className="col-md-6 col-sm-12 mt-1">
+              <h4 className="pb-2">Safety Percentage Order</h4>
               <ReactSelect
                 instanceId="safety-percentage-selector"
                 value={selectedSafetyPercentage}
@@ -57,7 +52,7 @@ const OrderBookTable = () => {
               />
             </div>
           </div>
-          <h1 className="main-header">Order Book <small>{selectedCurrencyPair.name}</small></h1>
+          <h1 className="main-header">Order Book <small className="selected-currency-pair">{selectedCurrencyPair.name}</small></h1>
           <div className="row estimator-row">
             <div className="col-12">
               <h4>Estimator</h4>
@@ -101,6 +96,10 @@ const OrderBookTable = () => {
                 height: 100%;
                 width: 100%;
                 background: grey;
+              }
+
+              .selected-currency-pair {
+                color: #6a8dcf;
               }
             `}
           </style>
