@@ -4,6 +4,7 @@ export default [{
   Header: 'Currency Pair',
   accessor: 'currencyPair',
   filterable: true,
+  className: 'currency-pair',
   filterMethod: (filter, row) => {
     const str = row[filter.id].toLowerCase();
     return includes(str, filter.value.toLowerCase());
