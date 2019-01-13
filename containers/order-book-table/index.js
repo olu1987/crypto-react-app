@@ -32,7 +32,7 @@ const OrderBookTable = () => {
       && (
         <React.Fragment>
           <div className="row pb-3">
-            <div className="col-md-6 col-sm-12 mt-1">
+            <div className="col-md-6 col-sm-12 currency-pair-col">
               <h4 className="pb-2">Currency Pair</h4>
               <ReactSelect
                 instanceId="currency-selector"
@@ -42,7 +42,7 @@ const OrderBookTable = () => {
                 onChange={pair => setSelectedCurrencyPair(pair)}
               />
             </div>
-            <div className="col-md-6 col-sm-12 mt-1">
+            <div className="col-md-6 col-sm-12 safety-percentage-col">
               <h4 className="pb-2">Safety Percentage Order</h4>
               <ReactSelect
                 instanceId="safety-percentage-selector"
@@ -100,6 +100,17 @@ const OrderBookTable = () => {
 
               .selected-currency-pair {
                 color: #6a8dcf;
+              }
+
+              @media(max-width: 767px) {
+                .safety-percentage-col {
+                  margin-top: 12px;
+                }
+
+                .main-header {
+                  display: flex;
+                  flex-direction: column;
+                }
               }
             `}
           </style>
