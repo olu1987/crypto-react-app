@@ -5,7 +5,7 @@ import Nav from '../components/nav';
 const OrderBook = () => {
   return (
     <div className="container">
-      <HeadTag />
+      <HeadTag title="Order Book" />
       <Nav />
       <OrderBookTable />
     </div>

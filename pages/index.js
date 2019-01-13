@@ -3,7 +3,7 @@ import Nav from '../components/nav';
 
 const Index = () => (
   <div className="container">
-    <HeadTag />
+    <HeadTag title="Home" />
     <Nav />
     <div className="jumbotron">
       <h1>Crypto Reporter</h1>

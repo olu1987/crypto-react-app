@@ -5,7 +5,7 @@ import Nav from '../components/nav';
 const Ticker = () => {
   return (
     <div className="container">
-      <HeadTag />
+      <HeadTag title="Ticker" />
       <Nav />
       <TickerListTable />
     </div>

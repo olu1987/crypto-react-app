@@ -5,7 +5,7 @@ import ReportingCharts from '../containers/reporting-charts';
 const Ticker = () => {
   return (
     <div className="container">
-      <HeadTag />
+      <HeadTag title="Reporting" />
       <Nav />
       <ReportingCharts />
     </div>
