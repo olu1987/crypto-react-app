@@ -1,8 +1,13 @@
+import includes from 'core-js/library/fn/string/includes';
+
 export default [{
   Header: 'Currency Pair',
   accessor: 'currencyPair',
   filterable: true,
-  filterMethod: (filter, row) => row[filter.id].toLowerCase().includes(filter.value.toLowerCase()),
+  filterMethod: (filter, row) => {
+    const str = row[filter.id].toLowerCase();
+    return includes(str, filter.value.toLowerCase());
+  },
 },
 {
   Header: 'High',
