@@ -1,7 +1,5 @@
 # crypto-react-app
 
-Crypto React App
-
 To run this project on your development environment, download or git clone.
 
 If you do not have Node.js installed, download and install it from 
