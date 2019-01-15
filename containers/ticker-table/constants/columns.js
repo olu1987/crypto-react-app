@@ -3,7 +3,6 @@ import includes from 'core-js/library/fn/string/includes';
 export default [{
   Header: 'Currency Pair',
   accessor: 'currencyPair',
-  filterable: true,
   className: 'currency-pair',
   filterMethod: (filter, row) => {
     const str = row[filter.id].toLowerCase();

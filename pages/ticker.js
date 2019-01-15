@@ -1,4 +1,4 @@
-import TickerListTable from '../containers/ticker-list-table';
+import TickerTable from '../containers/ticker-table';
 import HeadTag from '../components/head-tag';
 import Nav from '../components/nav';
 
@@ -7,7 +7,7 @@ const Ticker = () => {
     <div className="container">
       <HeadTag title="Ticker" />
       <Nav />
-      <TickerListTable />
+      <TickerTable />
     </div>
   );
 };
